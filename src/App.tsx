@@ -1,9 +1,10 @@
 import { AppProvider } from "./providers";
+import { AppRouter } from "./routes";
 
 function App() {
   return (
     <AppProvider>
-      <div>react</div>
+      <AppRouter />
     </AppProvider>
   );
 }
