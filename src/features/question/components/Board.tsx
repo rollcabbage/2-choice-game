@@ -3,10 +3,23 @@ import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css";
 import "react-awesome-slider/dist/custom-animations/cube-animation.css";
 import QuestionData from "../assets/QuestionData.json";
+import { channel } from "@/lib/supabase";
 
 export const Board = () => {
-  const [selectorsOfA, setSelectorsOfA] = useState(["Aさん", "Bさん", "Cさん"]);
-  const [selectorsOfB, setSelectorsOfB] = useState(["Dさん", "Cさん", "Eさん"]);
+  const [selectorsOfA, setSelectorsOfA] = useState<string[]>([]);
+  const [selectorsOfB, setSelectorsOfB] = useState<string[]>([]);
+
+  const receiveOptionA = (message) => {
+    setSelectorsOfA([...selectorsOfA, message.payload.name]);
+  };
+
+  const receiveOptionB = (message) => {
+    setSelectorsOfB([...selectorsOfB, message.payload.name]);
+  };
+
+  channel.on("broadcast", { event: "A" }, (message) => receiveOptionA(message));
+
+  channel.on("broadcast", { event: "B" }, (message) => receiveOptionB(message));
 
   return (
     <>
