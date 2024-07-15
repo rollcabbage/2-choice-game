@@ -10,6 +10,13 @@ export const createRouter = () =>
       },
     },
     {
+      path: "/board",
+      lazy: async () => {
+        const { Board } = await import("@/features/question");
+        return { Component: Board };
+      },
+    },
+    {
       path: "*",
       lazy: async () => {
         const { NotFound } = await import("@/features/misc");

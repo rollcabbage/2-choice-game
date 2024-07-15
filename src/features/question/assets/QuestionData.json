@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "question_text": "牛丼ならどちらですか?",
+    "question_options": {
+      "A": "吉野家",
+      "B": "すき家"
+    }
+  },
+  {
+    "id": 2,
+    "question_text": "SUVならどちらですか?",
+    "question_options": {
+      "A": "ランクル",
+      "B": "RX"
+    }
+  },
+  {
+    "id": 3,
+    "question_text": "ハンバーグならどちらですか？",
+    "question_options": {
+      "A": "McDonald",
+      "B": "MosBurger"
+    }
+  }
+]
