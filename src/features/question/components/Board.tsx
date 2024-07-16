@@ -4,8 +4,10 @@ import "react-awesome-slider/dist/styles.css";
 import "react-awesome-slider/dist/custom-animations/cube-animation.css";
 import QuestionData from "../assets/QuestionData.json";
 import { channel } from "@/lib/supabase";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 export const Board = () => {
+  const [key, setKey] = useState<number>(0);
   const [selectorsOfA, setSelectorsOfA] = useState<string[]>([]);
   const [selectorsOfB, setSelectorsOfB] = useState<string[]>([]);
 
@@ -17,9 +19,10 @@ export const Board = () => {
     setSelectorsOfB([...selectorsOfB, message.payload.name]);
   };
 
-  const clearReceivedOptions = () => {
+  const moveToNextQuestion = () => {
     setSelectorsOfA([]);
     setSelectorsOfB([]);
+    setKey((prevKey) => prevKey + 1);
   };
 
   channel.on("broadcast", { event: "A" }, (message) => receiveOptionA(message));
@@ -31,7 +34,7 @@ export const Board = () => {
       <AwesomeSlider
         fillParent={true}
         animation="cubeAnimation"
-        onTransitionRequest={() => clearReceivedOptions()}
+        onTransitionRequest={() => moveToNextQuestion()}
       >
         {QuestionData.map((item, index) => (
           <div
@@ -89,6 +92,20 @@ export const Board = () => {
           </div>
         ))}
       </AwesomeSlider>
+      <div className="fixed inset-10">
+        <CountdownCircleTimer
+          key={key}
+          isPlaying
+          duration={10}
+          colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
+          colorsTime={[10, 5, 2, 0]}
+          size={128}
+          strokeWidth={12}
+          onComplete={() => console.log("completed")}
+        >
+          {({ remainingTime }) => remainingTime}
+        </CountdownCircleTimer>
+      </div>
     </>
   );
 };
