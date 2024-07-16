@@ -10,10 +10,17 @@ export const createRouter = () =>
       },
     },
     {
-      path: "/board",
+      path: "/question",
       lazy: async () => {
         const { Board } = await import("@/features/question");
         return { Component: Board };
+      },
+    },
+    {
+      path: "/answer",
+      lazy: async () => {
+        const { Selector } = await import("@/features/answer");
+        return { Component: Selector };
       },
     },
     {
