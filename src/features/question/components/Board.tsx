@@ -17,13 +17,22 @@ export const Board = () => {
     setSelectorsOfB([...selectorsOfB, message.payload.name]);
   };
 
+  const clearReceivedOptions = () => {
+    setSelectorsOfA([]);
+    setSelectorsOfB([]);
+  };
+
   channel.on("broadcast", { event: "A" }, (message) => receiveOptionA(message));
 
   channel.on("broadcast", { event: "B" }, (message) => receiveOptionB(message));
 
   return (
     <>
-      <AwesomeSlider fillParent={true} animation="cubeAnimation">
+      <AwesomeSlider
+        fillParent={true}
+        animation="cubeAnimation"
+        onTransitionRequest={() => clearReceivedOptions()}
+      >
         {QuestionData.map((item, index) => (
           <div
             key={index}
