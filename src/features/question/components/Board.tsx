@@ -25,6 +25,20 @@ export const Board = () => {
     setKey((prevKey) => prevKey + 1);
   };
 
+  const showResults = () => {
+    const a_container = document.getElementById("selector_a_container");
+    a_container?.classList.remove("invisible");
+    a_container?.classList.add("visible");
+
+    const b_container = document.getElementById("selector_b_container");
+    b_container?.classList.remove("invisible");
+    b_container?.classList.add("visible");
+  };
+
+  const countDownCompleted = () => {
+    showResults();
+  };
+
   channel.on("broadcast", { event: "A" }, (message) => receiveOptionA(message));
 
   channel.on("broadcast", { event: "B" }, (message) => receiveOptionB(message));
@@ -56,7 +70,7 @@ export const Board = () => {
 
                 <div
                   id="selector_a_container"
-                  className="flex flex-wrap gap-2 my-8"
+                  className="flex flex-wrap gap-2 my-8 invisible"
                 >
                   {selectorsOfA.map((selector, index) => (
                     <div
@@ -67,6 +81,9 @@ export const Board = () => {
                     </div>
                   ))}
                 </div>
+                <div className="text-center">
+                  回答者数：{selectorsOfA.length}
+                </div>
               </div>
 
               <div id="option_b_container" className="w-1/4">
@@ -76,7 +93,7 @@ export const Board = () => {
 
                 <div
                   id="selector_b_container"
-                  className="flex flex-wrap gap-2 my-8"
+                  className="flex flex-wrap gap-2 my-8 invisible"
                 >
                   {selectorsOfB.map((selector, index) => (
                     <div
@@ -87,21 +104,24 @@ export const Board = () => {
                     </div>
                   ))}
                 </div>
+                <div className="text-center">
+                  回答者数：{selectorsOfB.length}
+                </div>
               </div>
             </div>
           </div>
         ))}
       </AwesomeSlider>
-      <div className="fixed inset-10">
+      <div className="fixed">
         <CountdownCircleTimer
           key={key}
           isPlaying
-          duration={10}
+          duration={20}
           colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
           colorsTime={[10, 5, 2, 0]}
           size={128}
           strokeWidth={12}
-          onComplete={() => console.log("completed")}
+          onComplete={() => countDownCompleted()}
         >
           {({ remainingTime }) => remainingTime}
         </CountdownCircleTimer>
