@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const Landing = () => {
   return (
     <div className="flex h-screen items-center bg-white">

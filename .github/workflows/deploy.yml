@@ -39,6 +39,9 @@ jobs:
         run: yarn install
       - name: Build
         run: yarn build
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_KEY: ${{ secrets.VITE_SUPABASE_KEY }}
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
