@@ -5,6 +5,7 @@ import { Button, Field, Input, Label } from "@headlessui/react";
 export const Selector = () => {
   const [name, setName] = useState<string>("");
   const nameRef = useRef<HTMLInputElement>(null!);
+  const [answerable, setAnswerable] = useState<boolean>(false);
 
   const handleSelectorA = () => {
     channel.send({
@@ -12,6 +13,7 @@ export const Selector = () => {
       event: "A",
       payload: { answer: "A", name: name },
     });
+    setAnswerable(true);
   };
 
   const handleSelectorB = () => {
@@ -20,12 +22,21 @@ export const Selector = () => {
       event: "B",
       payload: { answer: "B", name: name },
     });
+    setAnswerable(true);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setName(nameRef.current.value);
   };
+
+  const handleAnswerable = () => {
+    setAnswerable(false);
+  };
+
+  channel.on("broadcast", { event: "answerable" }, (message) =>
+    handleAnswerable()
+  );
 
   return (
     <>
@@ -53,14 +64,16 @@ export const Selector = () => {
           <div className="text-lg font-medium">{name}</div>
           <Button
             type="button"
-            className="mt-5 rounded-lg bg-sky-600 px-32 py-8 text-white data-[hover]:bg-sky-500 data-[active]:bg-sky-700"
+            disabled={answerable}
+            className="mt-5 rounded-lg bg-sky-600 px-32 py-8 text-white data-[hover]:bg-sky-500 data-[active]:bg-sky-700  data-[disabled]:bg-gray-500"
             onClick={handleSelectorA}
           >
             A
           </Button>
           <Button
             type="button"
-            className="mt-5 rounded-lg bg-green-600 px-32 py-8 text-white data-[hover]:bg-green-500 data-[active]:bg-green-700"
+            disabled={answerable}
+            className="mt-5 rounded-lg bg-green-600 px-32 py-8 text-white data-[hover]:bg-green-500 data-[active]:bg-green-700 data-[disabled]:bg-gray-500"
             onClick={handleSelectorB}
           >
             B

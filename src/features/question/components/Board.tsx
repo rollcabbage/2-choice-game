@@ -22,6 +22,10 @@ export const Board = () => {
   const moveToNextQuestion = () => {
     setSelectorsOfA([]);
     setSelectorsOfB([]);
+    channel.send({
+      type: "broadcast",
+      event: "answerable",
+    });
     setKey((prevKey) => prevKey + 1);
   };
 
