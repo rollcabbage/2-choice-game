@@ -5,11 +5,15 @@ import "react-awesome-slider/dist/custom-animations/cube-animation.css";
 import QuestionData from "../assets/QuestionData.json";
 import { channel } from "@/lib/supabase";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import { Button, Dialog } from "@headlessui/react";
+import _ from "lodash";
 
 export const Board = () => {
   const [key, setKey] = useState<number>(0);
+  const [isOpen, setIsOpen] = useState(false);
   const [selectorsOfA, setSelectorsOfA] = useState<string[]>([]);
   const [selectorsOfB, setSelectorsOfB] = useState<string[]>([]);
+  const [groupingResult, setGroupingResult] = useState<string[][]>();
 
   const receiveOptionA = (message) => {
     setSelectorsOfA([...selectorsOfA, message.payload.name]);
@@ -19,7 +23,7 @@ export const Board = () => {
     setSelectorsOfB([...selectorsOfB, message.payload.name]);
   };
 
-  const moveToNextQuestion = () => {
+  const moveToNextQuestion = (event) => {
     setSelectorsOfA([]);
     setSelectorsOfB([]);
     channel.send({
@@ -27,6 +31,10 @@ export const Board = () => {
       event: "answerable",
     });
     setKey((prevKey) => prevKey + 1);
+    if (event.nextIndex == QuestionData.length - 1) {
+      console.log("lasted");
+    }
+    console.log(event);
   };
 
   const showResults = () => {
@@ -43,16 +51,40 @@ export const Board = () => {
     showResults();
   };
 
+  const grouping = () => {
+    setIsOpen(true);
+    const result: string[][] = Array.from({ length: 8 }, () => []);
+    const shuffledArray = _.shuffle([...selectorsOfA, ...selectorsOfB]);
+    shuffledArray.forEach((value, index) => {
+      result[index % 8].push(value);
+    });
+    setGroupingResult(result);
+    console.log(result);
+  };
+
   channel.on("broadcast", { event: "A" }, (message) => receiveOptionA(message));
 
   channel.on("broadcast", { event: "B" }, (message) => receiveOptionB(message));
 
   return (
     <>
+      <Dialog
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        className="relative z-50"
+      >
+        <div className="fixed inset-0 flex flex-col w-screen items-center justify-center bg-slate-950 text-white">
+          {groupingResult?.map((group, index) => (
+            <div key={index}>
+              No.{index + 1} 組: {group + " "}
+            </div>
+          ))}
+        </div>
+      </Dialog>
       <AwesomeSlider
         fillParent={true}
         animation="cubeAnimation"
-        onTransitionRequest={() => moveToNextQuestion()}
+        onTransitionRequest={(event) => moveToNextQuestion(event)}
       >
         {QuestionData.map((item, index) => (
           <div
@@ -64,6 +96,7 @@ export const Board = () => {
               className="bg-yellow-600 text-center text-7xl sm:px-6 lg:px-8 lg:py-16"
             >
               {item.question_text}
+              <Button onClick={() => grouping()}>group</Button>
             </div>
 
             <div id="options_container" className="flex justify-around my-16">
