@@ -1,50 +1,82 @@
 [
   {
     "id": 1,
-    "question_text": "牛丼ならどちらですか?",
+    "question_text": "車は2ドア？4ドア？",
     "question_options": {
-      "A": "吉野家",
-      "B": "すき家"
+      "A": "2ドア",
+      "B": "4ドア"
     }
   },
   {
     "id": 2,
-    "question_text": "SUVならどちらですか?",
+    "question_text": "スポーツは観戦？実践?",
     "question_options": {
-      "A": "ランクル",
-      "B": "RX"
+      "A": "観戦",
+      "B": "実践"
     }
   },
   {
     "id": 3,
-    "question_text": "ハンバーグならどちらですか？",
+    "question_text": "送りたい人生はどっち？",
     "question_options": {
-      "A": "McDonald",
-      "B": "MosBurger"
+      "A": "充実した短い人生",
+      "B": "平凡だけど長生き"
     }
   },
   {
     "id": 4,
-    "question_text": "ラーメンならどちらですか？",
+    "question_text": "季節が変わるならどっち？",
     "question_options": {
-      "A": "横浜家系",
-      "B": "二郎"
+      "A": "一年中夏",
+      "B": "一年中冬"
     }
   },
   {
     "id": 5,
-    "question_text": "アウトドアならどちらですか？",
+    "question_text": "人生の最後に食べたいのはどっち？",
     "question_options": {
-      "A": "ゴルフ",
-      "B": "テニス"
+      "A": "いつもの食事",
+      "B": "高級レストランの食事"
     }
   },
   {
     "id": 6,
-    "question_text": "転職考えているですか？",
+    "question_text": "健康な体 or 自由に使える時間、お金で買えるとしたらどっち？",
     "question_options": {
-      "A": "もちろん",
-      "B": "内緒"
+      "A": "健康な体",
+      "B": "自由に使える時間"
+    }
+  },
+  {
+    "id": 7,
+    "question_text": "自分の命日 or 自分の死因、どちらかを知らされるとしたらどっち？",
+    "question_options": {
+      "A": "自分の命日",
+      "B": "自分の死因"
+    }
+  },
+  {
+    "id": 8,
+    "question_text": "最近買った買い物は？",
+    "question_options": {
+      "A": "衝動買い",
+      "B": "入念に比較したもの"
+    }
+  },
+  {
+    "id": 9,
+    "question_text": "どっちタイプ？",
+    "question_options": {
+      "A": "ツッコミ",
+      "B": "ボケ"
+    }
+  },
+  {
+    "id": 10,
+    "question_text": "欲しいのはどっち？",
+    "question_options": {
+      "A": "1万円当たった宝くじ",
+      "B": "100枚の宝くじ"
     }
   }
 ]
