@@ -1,12 +1,17 @@
+import { Button } from "@headlessui/react";
 import { Link } from "react-router-dom";
+import hero from "../assets/hero.png";
 
 export const Landing = () => {
   return (
-    <div className="flex h-screen items-center bg-white">
-      <div className="mx-auto max-w-7xl px-4 py-12 text-center sm:px-6 lg:px-8 lg:py-16">
-        <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          <span className="block">Hello React !</span>
-        </h2>
+    <div className="flex h-screen w-screen items-center bg-auto bg-no-repeat bg-center bg-sky-950 bg-[url('/public/home.png')]">
+      <div className="mx-auto text-center">
+        <img className="" src={hero}></img>
+        <Link to="/question">
+          <Button className="text-2xl font-extrabold bg-green-500 px-5 py-2 rounded-full">
+            start
+          </Button>
+        </Link>
       </div>
     </div>
   );

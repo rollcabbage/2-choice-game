@@ -89,30 +89,42 @@ export const Board = () => {
         {QuestionData.map((item, index) => (
           <div
             key={index}
-            className="flex-col w-screen h-screen items-center bg-white"
+            className="flex-col w-screen h-screen items-center bg-sky-950 bg-[url('/public/question.png')]"
           >
             <div
               id="question"
-              className="bg-yellow-600 text-center text-7xl sm:px-6 lg:px-8 lg:py-16"
+              className="text-center text-white text-7xl sm:px-6 lg:px-8 lg:py-16"
             >
               {item.question_text}
-              <Button onClick={() => grouping()}>group</Button>
+              <Button
+                className="fixed top-5 right-12 text-2xl "
+                onClick={() => grouping()}
+              >
+                グループ分け
+              </Button>
             </div>
 
-            <div id="options_container" className="flex justify-around my-16">
-              <div id="option_a_container" className="w-1/4">
-                <div className="text-4xl text-center">
-                  A:{item.question_options.A}
+            <div
+              id="options_container"
+              className="flex justify-center gap-10 my-16"
+            >
+              <div
+                id="option_a_container"
+                className="bg-yellow-400 rounded-lg w-1/3 h-full"
+              >
+                <div className="text-4xl text-center my-5 text-sky-950">
+                  <div className="my-2">A</div>
+                  {item.question_options.A}
                 </div>
 
                 <div
                   id="selector_a_container"
-                  className="flex flex-wrap gap-2 my-8 invisible"
+                  className="flex flex-wrap my-8 invisible"
                 >
                   {selectorsOfA.map((selector, index) => (
                     <div
                       key={index}
-                      className="bg-green-100 border-4 rounded-full text-base"
+                      className=" text-sky-950 text-2xl font-bold mx-3"
                     >
                       {selector}
                     </div>
@@ -123,9 +135,13 @@ export const Board = () => {
                 </div>
               </div>
 
-              <div id="option_b_container" className="w-1/4">
-                <div className="text-4xl text-center">
-                  B:{item.question_options.B}
+              <div
+                id="option_b_container"
+                className="bg-green-500 rounded-lg w-1/3"
+              >
+                <div className="text-4xl text-center my-5 text-sky-950">
+                  <div className="my-2">B</div>
+                  {item.question_options.B}
                 </div>
 
                 <div
@@ -135,7 +151,7 @@ export const Board = () => {
                   {selectorsOfB.map((selector, index) => (
                     <div
                       key={index}
-                      className="bg-red-100 border-4 rounded-full text-base"
+                      className=" text-sky-950 text-2xl font-bold mx-2"
                     >
                       {selector}
                     </div>
@@ -149,12 +165,12 @@ export const Board = () => {
           </div>
         ))}
       </AwesomeSlider>
-      <div className="fixed">
+      <div className="fixed top-5 left-5 text-white font-bold">
         <CountdownCircleTimer
           key={key}
           isPlaying
-          duration={20}
-          colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
+          duration={30}
+          colors={["#FF7F50", "#DC143C", "#FF0000", "#FF0000"]}
           colorsTime={[10, 5, 2, 0]}
           size={128}
           strokeWidth={12}
